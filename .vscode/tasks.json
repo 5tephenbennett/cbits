@@ -1,0 +1,304 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build (Release)",
+      "type": "shell",
+      "command": "./build.sh",
+      "icon": {
+        "id": "tools"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"],
+      "detail": "Build the project in Release mode.",
+      "options": {
+        "statusbar": {
+          "color": "#22C1D6",
+          "label": "Build"
+        }
+      }
+    },
+    {
+      "label": "Build (Debug)",
+      "type": "shell",
+      "command": "./build.sh",
+      "args": ["--debug"],
+      "icon": {
+        "id": "bug"
+      },
+      "group": "build",
+      "problemMatcher": ["$gcc"],
+      "detail": "Build the project in Debug mode.",
+      "options": {
+        "statusbar": {
+          "color": "#ff6b6b",
+          "label": "Debug Build"
+        }
+      }
+    },
+    {
+      "label": "Clean Build",
+      "type": "shell",
+      "command": "./build.sh",
+      "args": ["--clean"],
+      "icon": {
+        "id": "trash"
+      },
+      "group": "build",
+      "problemMatcher": ["$gcc"],
+      "detail": "Clean and rebuild the project.",
+      "options": {
+        "statusbar": {
+          "color": "#ffa500",
+          "label": "Clean Build"
+        }
+      }
+    },
+    {
+      "label": "Build without Tests",
+      "type": "shell",
+      "command": "./build.sh",
+      "args": ["--no-tests"],
+      "icon": {
+        "id": "tools"
+      },
+      "group": "build",
+      "problemMatcher": ["$gcc"],
+      "detail": "Build the project without running tests.",
+      "options": {
+        "statusbar": {
+          "color": "#22C1D6",
+          "label": "Build (No Tests)"
+        }
+      }
+    },
+    {
+      "label": "Install Library",
+      "type": "shell",
+      "command": "./build.sh",
+      "args": ["--install", "--install-prefix", "${workspaceFolder}/install"],
+      "icon": {
+        "id": "package"
+      },
+      "group": "build",
+      "problemMatcher": ["$gcc"],
+      "detail": "Build and install the library to local install directory.",
+      "options": {
+        "statusbar": {
+          "color": "#4CAF50",
+          "label": "Install"
+        }
+      }
+    },
+    {
+      "label": "Run Tests",
+      "type": "shell",
+      "command": "bash",
+      "args": ["-c", "./bit_ops/test/bit_ops_gtest"],
+      "icon": {
+        "id": "beaker"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "detail": "Run all automated tests (Google Tests with sanitizers).",
+      "options": {
+        "cwd": "${workspaceFolder}/build",
+        "statusbar": {
+          "color": "#22d682",
+          "label": "Test"
+        }
+      },
+      "dependsOn": "Build (Debug)"
+    },
+    {
+      "label": "Run Interactive Test",
+      "type": "shell",
+      "command": "./bit_ops/test/bit_ops_interactive",
+      "icon": {
+        "id": "terminal"
+      },
+      "group": "test",
+      "detail": "Run the interactive bit operations test program.",
+      "options": {
+        "cwd": "${workspaceFolder}/build",
+        "statusbar": {
+          "color": "#9C27B0",
+          "label": "Interactive"
+        }
+      },
+      "dependsOn": "Build (Release)"
+    },
+    {
+      "label": "Format Code",
+      "type": "shell",
+      "command": "./build.sh",
+      "args": ["--format"],
+      "icon": {
+        "id": "git-compare"
+      },
+      "group": "build",
+      "detail": "Format all source files with clang-format.",
+      "options": {
+        "statusbar": {
+          "color": "#ca9b3d",
+          "label": "Format"
+        }
+      }
+    },
+    {
+      "label": "Check Formatting",
+      "type": "shell",
+      "command": "./build.sh",
+      "args": ["--format-check"],
+      "icon": {
+        "id": "checklist"
+      },
+      "group": "test",
+      "detail": "Check code formatting with clang-format.",
+      "options": {
+        "statusbar": {
+          "color": "#FFC107",
+          "label": "Format Check"
+        }
+      }
+    },
+    {
+      "label": "Static Analysis (clang-tidy)",
+      "type": "shell",
+      "command": "./build.sh",
+      "args": ["--tidy"],
+      "icon": {
+        "id": "search-fuzzy"
+      },
+      "group": "test",
+      "problemMatcher": {
+        "owner": "clang-tidy",
+        "source": "clang-tidy",
+        "fileLocation": "absolute",
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error|note):\\s+(.*)\\s+\\[(.*)\\]$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4, // e.g., warning, error
+          "message": 5,
+          "code": 6,
+        }
+      },
+      "detail": "Run clang-tidy static analysis with aggressive checks.",
+      "options": {
+        "statusbar": {
+          "color": "#E91E63",
+          "label": "Static Analysis"
+        }
+      }
+    },
+    {
+      "label": "Auto-fix Issues (clang-tidy)",
+      "type": "shell",
+      "command": "./build.sh",
+      "args": ["--tidy=fix"],
+      "icon": {
+        "id": "tools"
+      },
+      "group": "build",
+      "detail": "Run clang-tidy with basic automatic fixes for common issues.",
+      "options": {
+        "statusbar": {
+          "color": "#4CAF50",
+          "label": "Auto-fix"
+        }
+      }
+    },
+    {
+      "label": "Aggressive Auto-fix (clang-tidy)",
+      "type": "shell",
+      "command": "./build.sh",
+      "args": ["--tidy=fix-aggressive"],
+      "icon": {
+        "id": "zap"
+      },
+      "group": "build",
+      "detail": "Run aggressive clang-tidy auto-fix (may make significant changes - commit first!).",
+      "options": {
+        "statusbar": {
+          "color": "#FF5722",
+          "label": "⚡ Aggressive Fix"
+        }
+      }
+    },
+    {
+      "label": "Generate Documentation",
+      "type": "shell",
+      "command": "./build.sh",
+      "args": ["--docs"],
+      "icon": {
+        "id": "book"
+      },
+      "group": "build",
+      "detail": "Generate API documentation with Doxygen.",
+      "options": {
+        "statusbar": {
+          "color": "#3F51B5",
+          "label": "Docs"
+        }
+      }
+    },
+    {
+      "label": "Clean Build Artifacts",
+      "type": "shell",
+      "command": "rm",
+      "args": ["-rf", "build", "install"],
+      "icon": {
+        "id": "trash"
+      },
+      "group": "build",
+      "detail": "Remove all build artifacts and directories.",
+      "options": {
+        "statusbar": {
+          "hide": true
+        }
+      }
+    },
+    {
+      "label": "Configure CMake",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["-B", "build", "-DCMAKE_BUILD_TYPE=Debug"],
+      "icon": {
+        "id": "gear"
+      },
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "Configure CMake build system.",
+      "options": {
+        "statusbar": {
+          "color": "#607D8B",
+          "label": "Configure"
+        }
+      }
+    },
+    {
+      "label": "Generate Coverage",
+      "type": "shell",
+      "command": "./build.sh --debug --coverage && ./build/bit_ops/test/bit_ops_gtest && lcov --capture --directory build --output-file build/coverage/coverage.info && lcov --extract build/coverage/coverage.info \"*/bit_ops/src/*\" --output-file build/coverage/coverage_filtered.info && cp build/coverage/coverage_filtered.info build/coverage/lcov.info",
+      "icon": {
+        "id": "graph"
+      },
+      "group": "test",
+      "problemMatcher": [],
+      "detail": "Build with coverage, run tests, and generate coverage files for VS Code extensions.",
+      "options": {
+        "statusbar": {
+          "color": "#4CAF50",
+          "label": "Coverage"
+        }
+      }
+    }
+  ]
+}

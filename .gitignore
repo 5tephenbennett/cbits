@@ -1,3 +1,17 @@
+# IDE and editor files
+compile_commands.json
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Build directories
+build/
+docs/html
+
 # Prerequisites
 *.d
 
