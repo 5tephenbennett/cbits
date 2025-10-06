@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/bit_ops/include",
+                "${workspaceFolder}/bit_ops/src",
+                "${workspaceFolder}/bit_ops/test/../src",
+                "${workspaceFolder}/bit_ops/test/../include",
+                "${workspaceFolder}/build/_deps/googletest-src/googletest/include",
+                "${workspaceFolder}/build/_deps/googletest-src/googletest",
+                "${workspaceFolder}/build/_deps/googletest-src/googlemock/include"
+            ],
+            "defines": [
+                "ARCH_TWOS_COMPLEMENT",
+                "COUNT_BITS_LOOKUP",
+                "HAVE_64_BIT_SUPPORT",
+                "LINUX_BUILD",
+                "SIGNED_SHIFTS"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c99",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compileCommands": "${workspaceFolder}/compile_commands.json",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/bit_ops"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ],
+    "version": 4
+}

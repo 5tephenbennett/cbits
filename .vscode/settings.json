@@ -1,0 +1,50 @@
+{
+  "prettier.requireConfig": true,
+  "prettier.ignorePath": ".prettierignore",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "stylelint.validate": ["css", "scss"],
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "search.exclude": {
+    "**/build/**/*": true,
+    "**/.git/**/*": true,
+    "**/build/html/**/*": true,
+    "**/docs/**/*": true,
+  },
+  "files.exclude": {
+    "**/.git/**/*": true,
+    "**/build/_deps/**/*": true,
+  },
+  "C_Cpp.files.exclude": {
+    "**/build/**": true
+  },
+  "C_Cpp.intelliSenseEngine": "default",
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/compile_commands.json",
+  "cSpell.enabled": true,
+  "files.associations": {
+    "bit_interactive.h": "c",
+    "bit_ops.h": "c",
+    "bit32_ops.h": "c",
+    "random": "c"
+  },
+  "coverage-gutters.coverageFileNames": [
+    "coverage_filtered.info",
+    "lcov.info",
+    "coverage.info"
+  ],
+  "coverage-gutters.showGutterCoverage": true,
+  "coverage-gutters.showLineCoverage": true,
+  "coverage-gutters.showRulerCoverage": true,
+  "coverage-gutters.coverageBaseDir": "build/coverage",
+  "coverage-gutters.ignoredPathGlobs": "**/node_modules/**,**/test/**,**/tests/**,**/*.test.*,**/*.spec.*",
+  "markiscodecoverage.enableDecorations": true,
+  "markiscodecoverage.searchCriteria": "${workspaceFolder}/build/coverage/lcov*.info",
+  "markiscodecoverage.coverageThreshold": 80,
+  "markiscodecoverage.enableOnStartup": true,
+}

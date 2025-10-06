@@ -1,0 +1,31 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# Check if we have shared or static libraries available
+set(bit_ops_SHARED_AVAILABLE @BUILD_SHARED_LIBS@)
+set(bit_ops_STATIC_AVAILABLE @BUILD_STATIC_LIBS@)
+
+# Include the targets file
+include("${CMAKE_CURRENT_LIST_DIR}/bit_ops-targets.cmake")
+
+# Set the found flag
+set(bit_ops_FOUND TRUE)
+
+# Provide some helpful variables
+if(bit_ops_SHARED_AVAILABLE)
+    set(bit_ops_SHARED_LIBRARY bit_ops::shared)
+endif()
+
+if(bit_ops_STATIC_AVAILABLE)
+    set(bit_ops_STATIC_LIBRARY bit_ops::static)
+endif()
+
+# Default library target
+if(bit_ops_SHARED_AVAILABLE)
+    set(bit_ops_LIBRARY bit_ops::shared)
+elseif(bit_ops_STATIC_AVAILABLE)
+    set(bit_ops_LIBRARY bit_ops::static)
+endif()
+
+check_required_components(bit_ops)
